@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="あなたに合う海外リモートワークの入口を、9つの質問で診断します。">
+  <title>海外リモートワーク入口診断｜Japalent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #14213d;
+      --muted: #667085;
+      --line: #e5e9f0;
+      --surface: #f7f8fb;
+      --white: #fff;
+      --linkway: #1266d5;
+      --linkway-soft: #edf5ff;
+      --remote: #f16a3a;
+      --remote-soft: #fff3ed;
+      --green: #06c755;
+      --shadow: 0 24px 70px rgba(20, 33, 61, .1);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(18, 102, 213, .09), transparent 30rem),
+        radial-gradient(circle at 90% 10%, rgba(241, 106, 58, .09), transparent 32rem),
+        var(--surface);
+      font-family: "Noto Sans JP", sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
+    [hidden] { display: none !important; }
+
+    .shell {
+      width: min(100% - 32px, 940px);
+      margin-inline: auto;
+    }
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0 10px;
+    }
+    .brand {
+      font-family: "DM Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .brand small {
+      display: block;
+      margin-top: -3px;
+      color: var(--muted);
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .14em;
+    }
+    .header-label {
+      padding: 7px 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.7);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 48px 0 30px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      margin: 0 0 16px;
+      color: #42526d;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .eyebrow::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--linkway), var(--remote));
+      content: "";
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 7vw, 58px);
+      line-height: 1.28;
+      letter-spacing: -.055em;
+    }
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(100deg, var(--linkway) 15%, #704eca 52%, var(--remote) 90%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+    .hero-copy {
+      max-width: 610px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .route {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .route-chip {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: 0 5px 20px rgba(20,33,61,.06);
+    }
+    .route-chip.linkway { color: var(--linkway); }
+    .route-chip.remote { color: var(--remote); }
+    .route-plus { color: #98a2b3; }
+
+    .diagnosis-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 530px;
+      padding: clamp(24px, 5vw, 48px);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--shadow);
+    }
+    .start-view {
+      display: grid;
+      min-height: 430px;
+      place-items: center;
+      text-align: center;
+    }
+    .start-inner { max-width: 540px; }
+    .mini-label {
+      margin: 0 0 10px;
+      color: var(--linkway);
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.4;
+      letter-spacing: -.035em;
+    }
+    .start-copy {
+      margin: 16px 0 26px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+      margin-bottom: 28px;
+    }
+    .meta-row span {
+      padding: 7px 11px;
+      color: #556176;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .primary-button {
+      min-width: min(100%, 330px);
+      padding: 16px 26px;
+      color: var(--white);
+      border: 0;
+      border-radius: 13px;
+      background: var(--ink);
+      box-shadow: 0 14px 30px rgba(20,33,61,.18);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .primary-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(20,33,61,.24);
+    }
+    .privacy-note {
+      margin: 13px 0 0;
+      color: #98a2b3;
+      font-size: 10px;
+    }
+
+    .quiz-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .progress-track {
+      overflow: hidden;
+      flex: 1;
+      height: 7px;
+      border-radius: 99px;
+      background: #edf0f4;
+    }
+    .progress-bar {
+      width: 11.1%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--linkway), #7153ca, var(--remote));
+      transition: width .35s ease;
+    }
+    .progress-count {
+      min-width: 43px;
+      color: var(--muted);
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .question-kicker {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    .question-title {
+      min-height: 70px;
+      margin: 0 0 25px;
+      font-size: clamp(21px, 4vw, 29px);
+      line-height: 1.5;
+      letter-spacing: -.025em;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+    }
+    .option {
+      position: relative;
+      display: flex;
+      min-height: 62px;
+      padding: 14px 42px 14px 16px;
+      align-items: center;
+      color: #344054;
+      border: 1.5px solid var(--line);
+      border-radius: 13px;
+      background: var(--white);
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: border-color .18s, background .18s, transform .18s;
+    }
+    .option::after {
+      position: absolute;
+      right: 16px;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid #ccd3dd;
+      border-radius: 50%;
+      content: "";
+    }
+    .option:hover {
+      border-color: #9fbce3;
+      background: #f9fbff;
+      transform: translateY(-1px);
+    }
+    .option.selected {
+      color: #0b55b5;
+      border-color: var(--linkway);
+      background: var(--linkway-soft);
+    }
+    .option.selected::after {
+      border: 5px solid var(--linkway);
+      background: var(--white);
+    }
+    .quiz-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 28px;
+    }
+    .back-button {
+      padding: 8px 0;
+      color: var(--muted);
+      border: 0;
+      background: transparent;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .next-hint {
+      color: #98a2b3;
+      font-size: 10px;
+    }
+
+    .result-view { text-align: center; }
+    .result-badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .result-badge.linkway { color: var(--linkway); background: var(--linkway-soft); }
+    .result-badge.remote { color: #d94f20; background: var(--remote-soft); }
+    .result-badge.hybrid { color: #6245b5; background: #f1edff; }
+    .result-title {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.35;
+      letter-spacing: -.045em;
+    }
+    .result-lead {
+      max-width: 600px;
+      margin: 15px auto 23px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .reason-list {
+      display: grid;
+      max-width: 660px;
+      margin: 0 auto 25px;
+      padding: 0;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      list-style: none;
+    }
+    .reason-list li {
+      display: grid;
+      min-height: 82px;
+      padding: 13px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfd;
+      color: #475467;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+    .line-button {
+      display: inline-flex;
+      min-width: min(100%, 380px);
+      padding: 15px 24px;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      color: var(--white);
+      border-radius: 13px;
+      background: var(--green);
+      box-shadow: 0 13px 28px rgba(6,199,85,.2);
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .line-icon {
+      display: grid;
+      width: 23px;
+      height: 23px;
+      place-items: center;
+      color: var(--green);
+      border-radius: 50%;
+      background: var(--white);
+      font-family: "DM Sans", sans-serif;
+      font-size: 8px;
+      font-weight: 800;
+    }
+    .result-note {
+      margin: 11px 0 0;
+      color: #98a2b3;
+      font-size: 10px;
+    }
+    .result-secondary {
+      margin-top: 18px;
+      padding: 8px 10px;
+      color: var(--muted);
+      border: 0;
+      border-bottom: 1px solid #cfd5dd;
+      background: transparent;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .comparison-section { padding: 90px 0 70px; }
+    .section-head {
+      max-width: 600px;
+      margin-bottom: 26px;
+    }
+    .section-copy {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .comparison-wrap {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: 0 18px 50px rgba(20,33,61,.06);
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 170px repeat(2, 1fr);
+    }
+    .comparison-grid > div {
+      min-width: 0;
+      padding: 19px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .comparison-grid > div:nth-last-child(-n+3) { border-bottom: 0; }
+    .comparison-grid > div:not(:nth-child(3n+1)) { border-left: 1px solid var(--line); }
+    .table-corner { background: #fafbfc; }
+    .service-head { text-align: left; }
+    .service-head.linkway { color: var(--linkway); background: var(--linkway-soft); }
+    .service-head.remote { color: #d95627; background: var(--remote-soft); }
+    .service-name {
+      display: block;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+    .service-sub {
+      display: block;
+      margin-top: 2px;
+      color: #667085;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .row-label {
+      display: flex;
+      align-items: center;
+      color: #475467;
+      background: #fafbfc;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .cell {
+      color: #344054;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .cell strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 13px;
+    }
+    .tag {
+      display: inline-block;
+      margin-bottom: 5px;
+      padding: 3px 7px;
+      border-radius: 6px;
+      font-size: 9px;
+      font-weight: 800;
+    }
+    .tag.mid { color: #0b55b5; background: var(--linkway-soft); }
+    .tag.easy { color: #d95627; background: var(--remote-soft); }
+    .price-list { margin: 0; padding: 0; list-style: none; }
+    .price-list li + li { margin-top: 5px; }
+    .price-list small { color: var(--muted); font-size: 9px; font-weight: 500; }
+    .table-link {
+      display: inline-flex;
+      margin-top: 7px;
+      color: var(--linkway);
+      font-size: 10px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .remote-link { color: #d95627; }
+    .pricing-note {
+      margin: 11px 3px 0;
+      color: #98a2b3;
+      font-size: 9px;
+    }
+    .footer {
+      padding: 8px 0 30px;
+      color: #98a2b3;
+      text-align: center;
+      font-family: "DM Sans", sans-serif;
+      font-size: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .shell { width: min(100% - 24px, 940px); }
+      .site-header { padding-top: 17px; }
+      .hero { padding: 34px 0 24px; }
+      .hero-copy { font-size: 13px; }
+      .diagnosis-card {
+        min-height: 550px;
+        padding: 24px 18px;
+        border-radius: 19px;
+      }
+      .start-view { min-height: 490px; }
+      .options { grid-template-columns: 1fr; }
+      .question-title { min-height: auto; margin-bottom: 19px; }
+      .option { min-height: 57px; }
+      .reason-list { grid-template-columns: 1fr; }
+      .reason-list li { min-height: auto; }
+      .comparison-section { padding-top: 65px; }
+      .comparison-wrap {
+        overflow-x: auto;
+        border-radius: 15px;
+      }
+      .comparison-grid { min-width: 690px; grid-template-columns: 130px repeat(2, 280px); }
+      .comparison-grid > div { padding: 16px 14px; }
+      .comparison-wrap::after {
+        position: sticky;
+        right: 8px;
+        bottom: 7px;
+        display: block;
+        width: max-content;
+        margin: -27px 8px 7px auto;
+        padding: 4px 8px;
+        color: #667085;
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        background: rgba(255,255,255,.92);
+        content: "横にスクロール →";
+        font-size: 8px;
+        font-weight: 700;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header shell">
+    <div class="brand">Japalent<small>海外リモートを当たり前に</small></div>
+    <div class="header-label">無料診断</div>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <p class="eyebrow">海外リモートワークの2つの入口</p>
+      <h1>あなたに合うのは<br><span class="gradient-text">どちらの学び方？</span></h1>
+      <p class="hero-copy">LinkedInに特化する「LinkWay」と、海外リモートワーク全般をゼロから学ぶ「リモート出稼ぎ大学」。9つの質問で、今のあなたに合う入口が分かります。</p>
+      <div class="route" aria-label="比較する2サービス">
+        <span class="route-chip linkway">LinkWay</span>
+        <span class="route-plus">or</span>
+        <span class="route-chip remote">リモート出稼ぎ大学</span>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="海外リモートワーク入口診断">
+      <div class="diagnosis-card">
+        <div class="start-view" id="startView">
+          <div class="start-inner">
+            <p class="mini-label">FREE DIAGNOSIS</p>
+            <h2>今のあなたに合う入口を<br>無料で診断します</h2>
+            <p class="start-copy">知識や経験がなくても大丈夫です。正解・不正解はありません。現在の状況に一番近いものを選んでください。</p>
+            <div class="meta-row">
+              <span>全9問</span>
+              <span>所要時間 約1分</span>
+              <span>登録不要</span>
+            </div>
+            <button class="primary-button" id="startButton" type="button">無料診断をはじめる →</button>
+            <p class="privacy-note">回答内容は保存・送信されません</p>
+          </div>
+        </div>
+
+        <div id="quizView" hidden>
+          <div class="quiz-top">
+            <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+            <span class="progress-count" id="progressCount">1 / 9</span>
+          </div>
+          <p class="question-kicker" id="questionKicker">QUESTION 01</p>
+          <h2 class="question-title" id="questionTitle"></h2>
+          <div class="options" id="options"></div>
+          <div class="quiz-actions">
+            <button class="back-button" id="backButton" type="button">← 前の質問へ</button>
+            <span class="next-hint">選ぶと次へ進みます</span>
+          </div>
+        </div>
+
+        <div class="result-view" id="resultView" aria-live="polite" hidden>
+          <span class="result-badge" id="resultBadge"></span>
+          <h2 class="result-title" id="resultTitle"></h2>
+          <p class="result-lead" id="resultLead"></p>
+          <ul class="reason-list" id="reasonList"></ul>
+          <a class="line-button" id="resultCta" href="#" target="_blank" rel="noopener">
+            <span class="line-icon">LINE</span>
+            <span id="resultCtaText"></span>
+          </a>
+          <p class="result-note" id="resultNote"></p>
+          <br>
+          <button class="result-secondary" id="restartButton" type="button">もう一度診断する</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="comparison-section shell" id="comparison">
+      <div class="section-head">
+        <p class="mini-label">QUICK COMPARISON</p>
+        <h2>2つの入口を比較する</h2>
+        <p class="section-copy">競合するサービスではなく、目標と現在地に合わせて選べるJapalentの2つの入口です。</p>
+      </div>
+
+      <div class="comparison-wrap" tabindex="0" aria-label="LinkWayとリモート出稼ぎ大学の比較表">
+        <div class="comparison-grid">
+          <div class="table-corner"></div>
+          <div class="service-head linkway">
+            <span class="service-name">LinkWay</span>
+            <span class="service-sub">LinkedIn特化</span>
+          </div>
+          <div class="service-head remote">
+            <span class="service-name">リモート出稼ぎ大学</span>
+            <span class="service-sub">海外リモート全般</span>
+          </div>
+
+          <div class="row-label">おすすめの人</div>
+          <div class="cell"><strong>LinkedInに集中したい人</strong>経歴や強みを整え、海外企業から見つけてもらう土台を育てたい</div>
+          <div class="cell"><strong>海外リモート初心者</strong>選択肢や進め方を広く知り、まず最初の海外案件を獲得したい</div>
+
+          <div class="row-label">学ぶ範囲</div>
+          <div class="cell"><strong>LinkedInに特化</strong>プロフィール・発信・交流・求人リサーチ・海外企業とのやり取り</div>
+          <div class="cell"><strong>海外リモート全般</strong>Upworkなどの案件サイト・プロフィール・応募・面接・案件獲得</div>
+
+          <div class="row-label">目指すゴール</div>
+          <div class="cell"><strong>信頼が積み上がる状態</strong>LinkedInを、海外企業とつながる長期的な資産にする</div>
+          <div class="cell"><strong>最初の海外案件獲得</strong>正しい順番を知り、未経験からゼロイチを達成する</div>
+
+          <div class="row-label">初期ハードル</div>
+          <div class="cell"><span class="tag mid">やや高め</span><strong>中級・特化型</strong>自分の経歴を整理し、継続的にプロフィールや発信を育てる</div>
+          <div class="cell"><span class="tag easy">始めやすい</span><strong>初心者・総合型</strong>ロードマップに沿って、選択肢を知るところから始める</div>
+
+          <div class="row-label">英語力</div>
+          <div class="cell"><strong>高い英語力は不要</strong>海外向けプロフィールや発信を作るため、英語に触れる機会は多め</div>
+          <div class="cell"><strong>中学生レベルから可</strong>日本語を強みにできる案件を含め、自分に合う選択肢から始める</div>
+
+          <div class="row-label">料金</div>
+          <div class="cell">
+            <ul class="price-list">
+              <li><strong>コミュニティ 月額3,980円</strong><small>入会金49,800円／先着100名は0円</small></li>
+              <li><strong>マンツーマン 199,000円</strong><small>1か月集中・期間限定案内価格</small></li>
+            </ul>
+            <a class="table-link" href="https://utage-system.com/p/Li3GUOcbkcBg" target="_blank" rel="noopener">LinkWayの詳細を見る →</a>
+          </div>
+          <div class="cell">
+            <ul class="price-list">
+              <li><strong>コミュニティ 入会金49,800円</strong><small>＋月額3,980円</small></li>
+              <li><strong>マンツーマン 219,900円〜</strong><small>Light 1か月／Basic・もととりプランあり</small></li>
+            </ul>
+            <a class="table-link remote-link" href="https://utage-system.com/p/7YTfp19fnwcZ" target="_blank" rel="noopener">リモート出稼ぎ大学の詳細を見る →</a>
+          </div>
+        </div>
+      </div>
+      <p class="pricing-note">※料金・キャンペーン・募集状況は変更される場合があります。2026年9月22日時点の各公式LP掲載情報です。最新情報は遷移先でご確認ください。</p>
+    </section>
+  </main>
+
+  <footer class="footer shell">© 2026 Japalent Inc.</footer>
+
+  <script>
+    const questions = [
+      {
+        title: "現在の年齢を教えてください",
+        note: "年齢は判定スコアには影響しません",
+        options: [
+          { label: "20代以下", value: "under29" },
+          { label: "30代", value: "30s" },
+          { label: "40代", value: "40s" },
+          { label: "50代以上", value: "over50" }
+        ]
+      },
+      {
+        title: "現在の働き方に最も近いものは？",
+        options: [
+          { label: "会社員・公務員", value: "employee", r: 1 },
+          { label: "フリーランス・経営者", value: "freelance", l: 1 },
+          { label: "主婦・主夫", value: "homemaker", r: 1 },
+          { label: "学生・離職中・その他", value: "other", r: 1 }
+        ]
+      },
+      {
+        title: "海外リモートワークの経験はありますか？",
+        options: [
+          { label: "未経験で、何から始めるかも分からない", value: "none", r: 3 },
+          { label: "調べたり登録したことはある", value: "research", r: 2 },
+          { label: "応募したことがある", value: "applied", l: 1, r: 1 },
+          { label: "海外案件を獲得したことがある", value: "won", l: 3 }
+        ]
+      },
+      {
+        title: "LinkedInの利用状況は？",
+        options: [
+          { label: "まだ登録していない", value: "none", r: 2 },
+          { label: "登録したが、ほぼ使っていない", value: "dormant", l: 1, r: 1 },
+          { label: "プロフィールを整えている途中", value: "profile", l: 3 },
+          { label: "投稿・交流・求人探しに使っている", value: "active", l: 4 }
+        ]
+      },
+      {
+        title: "Upworkなどの海外案件サイトの経験は？",
+        options: [
+          { label: "名前も使い方もよく分からない", value: "none", r: 3 },
+          { label: "知っているが登録していない", value: "know", r: 2 },
+          { label: "登録・プロフィール作成までした", value: "profile", r: 2 },
+          { label: "応募・案件獲得の経験がある", value: "active", l: 2, r: 1 }
+        ]
+      },
+      {
+        title: "今、最も学びたいことは？",
+        options: [
+          { label: "海外リモートの選択肢を広く知りたい", value: "broad", r: 4 },
+          { label: "まず最初の海外案件を獲得したい", value: "first", r: 4 },
+          { label: "LinkedInのプロフィール・発信を磨きたい", value: "linkedin", l: 5 },
+          { label: "海外企業から声がかかる土台を作りたい", value: "inbound", l: 5 }
+        ]
+      },
+      {
+        title: "1週間に確保できる時間は？",
+        options: [
+          { label: "3時間未満", value: "under3", r: 1 },
+          { label: "3〜5時間", value: "3to5", r: 1 },
+          { label: "6〜10時間", value: "6to10", l: 1, r: 1 },
+          { label: "11時間以上", value: "over11", l: 2, r: 1 }
+        ]
+      },
+      {
+        title: "現在の英語力に最も近いものは？",
+        options: [
+          { label: "ほとんど自信がない", value: "low", r: 2 },
+          { label: "翻訳ツールがあれば読み書きできる", value: "tool", l: 1, r: 1 },
+          { label: "日常的な読み書きができる", value: "daily", l: 2, r: 1 },
+          { label: "仕事で英語を使える", value: "business", l: 3 }
+        ]
+      },
+      {
+        title: "今の自分に合う進め方は？",
+        options: [
+          { label: "基礎から順番に、幅広く学びたい", value: "foundation", r: 4 },
+          { label: "案件紹介も含め、ゼロイチを目指したい", value: "first", r: 4 },
+          { label: "テーマをLinkedInに絞って実践したい", value: "focus", l: 5 },
+          { label: "まず基礎、その後LinkedInに進みたい", value: "step", r: 3, h: 5 }
+        ]
+      }
+    ];
+
+    const results = {
+      linkway: {
+        badge: "診断結果：LINKWAY",
+        badgeClass: "linkway",
+        title: "あなたは「LinkWay」向きです",
+        lead: "今のあなたには、海外リモート全般を広く学ぶより、LinkedInにテーマを絞って経歴・プロフィール・発信を育てる進め方が合っています。",
+        reasons: ["LinkedInへの関心が高い", "特化型の学び方が合う", "長期的な信頼資産を作れる"],
+        cta: "LinkWay公式LINEで相談する",
+        href: "https://lin.ee/XwVVhHC",
+        note: "LINE追加後、LinkWayについてご案内します"
+      },
+      remote: {
+        badge: "診断結果：リモート出稼ぎ大学",
+        badgeClass: "remote",
+        title: "あなたは「リモート出稼ぎ大学」向きです",
+        lead: "今のあなたには、LinkedInだけに絞る前に、海外リモートワークの選択肢と正しい進め方を広く知り、最初の案件獲得を目指す環境が合っています。",
+        reasons: ["初心者向けの順番で学べる", "海外案件の選択肢を広く知れる", "最初のゼロイチを目指せる"],
+        cta: "公式LINEで無料勉強会を見る",
+        href: "https://lin.ee/m3AED8xP",
+        note: "LINE追加後、スタートダッシュ勉強会をご案内します"
+      },
+      hybrid: {
+        badge: "診断結果：2段階ルート",
+        badgeClass: "hybrid",
+        title: "まずリモ大、その後LinkWayが最適です",
+        lead: "LinkedInとの相性はありますが、今はまず海外リモートワーク全般の基礎と案件獲得の流れを理解する段階です。ゼロイチ達成後にLinkWayへ進むと、より活用しやすくなります。",
+        reasons: ["まず基礎と選択肢を知る", "最初の案件獲得を目指す", "次にLinkedInを資産化する"],
+        cta: "公式LINEで無料勉強会を見る",
+        href: "https://lin.ee/m3AED8xP",
+        note: "まずはスタートダッシュ勉強会から始めましょう"
+      }
+    };
+
+    const state = { current: 0, answers: [] };
+    const startView = document.getElementById("startView");
+    const quizView = document.getElementById("quizView");
+    const resultView = document.getElementById("resultView");
+    const questionTitle = document.getElementById("questionTitle");
+    const questionKicker = document.getElementById("questionKicker");
+    const optionsContainer = document.getElementById("options");
+    const progressBar = document.getElementById("progressBar");
+    const progressCount = document.getElementById("progressCount");
+    const backButton = document.getElementById("backButton");
+
+    document.getElementById("startButton").addEventListener("click", () => {
+      startView.hidden = true;
+      quizView.hidden = false;
+      renderQuestion();
+    });
+
+    document.getElementById("restartButton").addEventListener("click", () => {
+      state.current = 0;
+      state.answers = [];
+      resultView.hidden = true;
+      quizView.hidden = false;
+      renderQuestion();
+      document.querySelector(".diagnosis-card").scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    backButton.addEventListener("click", () => {
+      if (state.current === 0) {
+        quizView.hidden = true;
+        startView.hidden = false;
+        return;
+      }
+      state.current -= 1;
+      renderQuestion();
+    });
+
+    function renderQuestion() {
+      const question = questions[state.current];
+      questionKicker.textContent = `QUESTION ${String(state.current + 1).padStart(2, "0")}`;
+      questionTitle.textContent = question.title;
+      progressCount.textContent = `${state.current + 1} / ${questions.length}`;
+      progressBar.style.width = `${((state.current + 1) / questions.length) * 100}%`;
+      optionsContainer.innerHTML = "";
+
+      question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        button.textContent = option.label;
+        button.setAttribute("aria-pressed", state.answers[state.current] === index ? "true" : "false");
+        if (state.answers[state.current] === index) button.classList.add("selected");
+        button.addEventListener("click", () => selectOption(index, button));
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    function selectOption(index, button) {
+      state.answers[state.current] = index;
+      optionsContainer.querySelectorAll(".option").forEach(item => {
+        item.classList.remove("selected");
+        item.setAttribute("aria-pressed", "false");
+      });
+      button.classList.add("selected");
+      button.setAttribute("aria-pressed", "true");
+
+      window.setTimeout(() => {
+        if (state.current < questions.length - 1) {
+          state.current += 1;
+          renderQuestion();
+        } else {
+          showResult(calculateResult());
+        }
+      }, 210);
+    }
+
+    function calculateResult() {
+      let linkwayScore = 0;
+      let remoteScore = 0;
+      let hybridScore = 0;
+
+      state.answers.forEach((answerIndex, questionIndex) => {
+        const option = questions[questionIndex].options[answerIndex];
+        linkwayScore += option.l || 0;
+        remoteScore += option.r || 0;
+        hybridScore += option.h || 0;
+      });
+
+      const overseas = questions[2].options[state.answers[2]].value;
+      const linkedin = questions[3].options[state.answers[3]].value;
+      const interest = questions[5].options[state.answers[5]].value;
+      const route = questions[8].options[state.answers[8]].value;
+      const isBeginner = ["none", "research"].includes(overseas);
+      const wantsLinkedIn = ["linkedin", "inbound"].includes(interest) || route === "focus";
+
+      if (route === "step") return "hybrid";
+      if (isBeginner && wantsLinkedIn && ["none", "dormant"].includes(linkedin)) return "hybrid";
+      if (linkwayScore >= remoteScore + 3 && wantsLinkedIn) return "linkway";
+      if (hybridScore >= 5) return "hybrid";
+      return "remote";
+    }
+
+    function showResult(resultKey) {
+      const result = results[resultKey];
+      quizView.hidden = true;
+      resultView.hidden = false;
+
+      const badge = document.getElementById("resultBadge");
+      badge.textContent = result.badge;
+      badge.className = `result-badge ${result.badgeClass}`;
+      document.getElementById("resultTitle").textContent = result.title;
+      document.getElementById("resultLead").textContent = result.lead;
+      document.getElementById("reasonList").innerHTML = result.reasons.map(reason => `<li>${reason}</li>`).join("");
+      document.getElementById("resultCta").href = result.href;
+      document.getElementById("resultCtaText").textContent = result.cta;
+      document.getElementById("resultNote").textContent = result.note;
+    }
+  </script>
+</body>
+</html>
